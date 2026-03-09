@@ -2,6 +2,20 @@
 
 A C# console application that analyses password strength, detects weak patterns, suggests improvements, and generates stronger password alternatives.
 
+## Project Purpose
+
+This project was built as a learning exercise while studying computer science.
+
+The goal was to practice building a complete C# command-line application while applying concepts such as:
+
+- Input validation
+- Password security principles
+- Program structure and modular design
+- Random password generation
+- Git version control and GitHub project documentation
+
+It demonstrates how a CLI tool can analyse password strength, detect weak patterns, and generate stronger alternatives.
+
 ## Features
 
 • Password strength scoring system  
