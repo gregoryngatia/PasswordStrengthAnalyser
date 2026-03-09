@@ -73,6 +73,9 @@ Suggested Strong Passwords
 Press ENTER to continue...
 Check another password? (y/n):
 ```
+## Example Output
+
+![Password Strength Analyser Demo](password-analyser-demo.png)
 ## Author
 
 Gregory Ngatia 
