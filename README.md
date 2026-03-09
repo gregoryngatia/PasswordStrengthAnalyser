@@ -75,7 +75,8 @@ Check another password? (y/n):
 ```
 ## Example Output
 
-![Password Strength Analyser Demo]((https://github.com/gregoryngatia/PasswordStrengthAnalyser/blob/main/password-analyser-demo.png.png))
-## Author
+## Example Output
+
+![Password Strength Analyser Demo](password-analyser-demo.png)## Author
 
 Gregory Ngatia 
