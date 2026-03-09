@@ -1,5 +1,4 @@
 # Password Strength Analyser
-A C# command-line application that evaluates password strength and generates secure alternatives.
 
 A C# console application that analyses password strength, detects weak patterns, suggests improvements, and generates stronger password alternatives.
 
