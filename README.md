@@ -1,30 +1,16 @@
-# Password Strength Analyser (C# CLI Tool)
+# Password Strength Analyser
+A C# command-line application that evaluates password strength and generates secure alternatives.
 
 A C# console application that analyses password strength, detects weak patterns, suggests improvements, and generates stronger password alternatives.
 
 ## Features
 
-- Checks whether a password contains:
-  - at least 8 characters
-  - an uppercase letter
-  - a lowercase letter
-  - a number
-  - a special character
-- Calculates a password score out of 100
-- Classifies password strength as:
-  - Very Weak
-  - Weak
-  - Medium
-  - Strong
-  - Very Strong
-- Detects common weak patterns such as:
-  - 123
-  - password
-  - admin
-  - qwerty
-- Gives suggestions for improving weak passwords
-- Generates 3 random strong password suggestions for weaker passwords
-- Allows the user to check multiple passwords in one session
+• Password strength scoring system  
+• Detection of common weak patterns (e.g., "password", "123")  
+• Suggestions to improve weak passwords  
+• Automatic generation of strong password alternatives  
+• ASCII-styled CLI interface  
+• Looping system for analysing multiple passwords
 
 ## Technologies Used
 
