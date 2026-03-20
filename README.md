@@ -1,19 +1,21 @@
-# FileOrganizerCLI
+# PasswordStrengthAnalyser
 
 ![Language](https://img.shields.io/badge/language-C%23-239120?style=flat&logo=csharp)
 ![Platform](https://img.shields.io/badge/platform-.NET-512BD4?style=flat&logo=dotnet)
 ![License](https://img.shields.io/badge/license-MIT-blue?style=flat)
 
-A C# command-line tool that automatically organizes files in any folder into categorized subfolders — and can reverse the process to restore everything back.
+A C# command-line tool that analyses password strength, detects weak patterns, and suggests stronger alternatives.
 No external dependencies. Single file. Runs anywhere .NET is installed.
 
-> Built as a portfolio project to practice C#, file system operations, and CLI application development.
+> Built as a portfolio project to practice C#, CLI development, input validation, and password security principles.
 
 ---
 
 ## Description
 
-FileOrganizerCLI scans a folder and sorts every file into logical categories like Documents, Media, Code, Archives, and more — based on file extension. It shows you a preview before making any changes, and if you change your mind, the reverse feature restores everything back to where it was and cleans up the empty folders.
+PasswordStrengthAnalyser takes any password input and runs it through a scoring system that checks for length, character variety, and common weak patterns. It gives you a score out of 100, explains what's wrong, and generates strong password alternatives when needed.
+
+It's designed to be simple to use and educational — showing exactly why a password passes or fails each requirement.
 
 ---
 
@@ -21,52 +23,62 @@ FileOrganizerCLI scans a folder and sorts every file into logical categories lik
 
 | Feature | Description |
 |---|---|
-| File Organization | Moves files into category subfolders based on extension |
-| Preview Before Action | Shows exactly where each file will go before anything is moved |
-| Reverse Organization | Restores all files back to the parent folder and removes empty subfolders |
-| Duplicate Handling | Safely renames files if a filename conflict exists |
-| Category Breakdown | Summary report showing how many files went into each category |
-| Color-coded Output | Green for success, yellow for warnings, red for errors |
-| Confirmation Prompt | Asks for Y/N confirmation before organizing or reversing |
-| Clean CLI Interface | Styled headers, section dividers, and formatted tables |
-
----
-
-## Categories
-
-| Category | Extensions |
-|---|---|
-| Documents | `.pdf` `.doc` `.docx` `.txt` `.xls` `.xlsx` `.csv` `.ppt` `.pptx` |
-| Media | `.jpg` `.png` `.mp4` `.mp3` `.gif` `.wav` `.mkv` `.svg` and more |
-| Code | `.cs` `.java` `.py` `.js` `.html` `.css` `.cpp` `.json` `.xml` |
-| Archives | `.zip` `.rar` `.7z` `.tar` `.gz` |
-| Applications | `.exe` `.msi` `.bat` `.cmd` |
-| Fonts | `.ttf` `.otf` |
-| Shortcuts | `.lnk` |
-| Other | Any unrecognized file types |
+| Requirement Checks | Validates length, uppercase, lowercase, digits, and special characters |
+| Strength Scoring | Calculates a score out of 100 based on complexity and length |
+| Weak Pattern Detection | Penalises passwords containing common patterns like `password`, `123`, `qwerty` |
+| Tailored Suggestions | Gives specific advice based on exactly what failed |
+| Strong Password Generator | Generates 3 random strong alternatives when score is 60 or below |
+| Visual Score Bar | Displays a `#` filled bar showing strength at a glance |
+| Loop Support | Analyse multiple passwords in one session without restarting |
 
 ---
 
 ## Example Screenshots
 
-### Organize Files
-![Organize Demo](screenshots/organize-demo.png)
+### Weak Password Analysis
+![Weak Password](screenshots/weak-password.png)
 
-### Reverse Organization
-![Reverse Demo](screenshots/reverse-demo.png)
-
-### Exit Screen
-![Exit Demo](screenshots/exit-demo.png)
+### Strong Password Analysis
+![Strong Password](screenshots/strong-password.png)
 
 ---
 
 ## How It Works
 
-When you choose **Organize**, the tool scans the selected folder for files at the top level only — it does not touch subfolders. Each file's extension is matched against the category map and a move plan is built. You see a full preview table before anything happens. On confirmation, files are moved and a summary breakdown is printed by category.
+The program runs each password through **5 requirement checks** — minimum length, uppercase, lowercase, digit, and special character — each worth 10 points.
 
-When you choose **Reverse**, the tool scans all known category subfolders and builds a restore plan. Again you see a preview before anything moves. On confirmation, files are moved back to the parent folder and any empty category folders are automatically deleted.
+Additional points are awarded for **longer passwords**: 10 points for 12+ characters, 20 for 16+, and 30 for 20+ characters. A **variety bonus** adds 5 points for each additional character category used beyond one.
 
-Duplicate filenames are handled safely — if a file with the same name already exists at the destination, the incoming file is renamed with a counter suffix like `filename (1).ext`.
+A **weak pattern penalty** is then applied — any password containing common patterns like `password`, `123`, or `qwerty` loses 15 points per match.
+
+The final score maps to a strength label: Very Weak, Weak, Medium, Strong, or Very Strong.
+
+If the score is 60 or below, the tool generates **3 randomised strong passwords** — each guaranteed to contain uppercase, lowercase, a digit, and a special character, shuffled using a Fisher-Yates algorithm.
+
+---
+
+## Example Output
+```
+  ════════════════════════════════════════════════════
+       PASSWORD STRENGTH ANALYSER  —  Advanced
+  ════════════════════════════════════════════════════
+
+  Enter a password to analyse: password123
+
+  ┌─ REQUIREMENT CHECKS ──────────────────────────────┐
+  │  [PASS]  At least 8 characters                   │
+  │  [FAIL]  At least one uppercase letter           │
+  │  [PASS]  At least one lowercase letter           │
+  │  [PASS]  At least one number                     │
+  │  [FAIL]  At least one special character          │
+  └───────────────────────────────────────────────────┘
+
+  ┌─ SCORE & STRENGTH ────────────────────────────────┐
+  │  Score   :   0 / 100  [-----------------]        │
+  │  Penalty : -45 pts                               │
+  │  Result  : Very Weak                             │
+  └───────────────────────────────────────────────────┘
+```
 
 ---
 
@@ -74,30 +86,26 @@ Duplicate filenames are handled safely — if a file with the same name already 
 
 **Requirements:** [.NET SDK](https://dotnet.microsoft.com/download) installed
 ```bash
-git clone https://github.com/gregoryngatia/FileOrganizerCLI.git
-cd FileOrganizerCLI
+git clone https://github.com/gregoryngatia/PasswordStrengthAnalyser.git
+cd PasswordStrengthAnalyser
 dotnet run
 ```
-
-Once running, enter any valid folder path when prompted — for example:
-- Windows: `C:\Users\YourName\Downloads`
 
 ---
 
 ## Project Structure
 ```
-FileOrganizerCLI/
+PasswordStrengthAnalyser/
 │
-├── Program.cs                  ← entire application, single file
-├── FileOrganizerCLI.csproj
-├── FileOrganizerCLI.sln
+├── Program.cs                    ← entire application, single file
+├── PasswordStrengthChecker.csproj
+├── PasswordStrengthChecker.sln
 ├── README.md
 ├── .gitignore
 │
 └── screenshots/
-    ├── organize-demo.png
-    ├── reverse-demo.png
-    └── exit-demo.png
+    ├── weak-password.png
+    └── strong-password.png
 ```
 
 ---
@@ -105,8 +113,8 @@ FileOrganizerCLI/
 ## Technologies Used
 
 - **C# / .NET** — core language and runtime
-- **System.IO** — file and directory operations
-- **Dictionary-based extension mapping** — for fast category lookups
+- **System.Collections.Generic** — list handling for suggestions and generated passwords
+- **Fisher-Yates shuffle** — for randomising generated password characters
 - No external libraries or NuGet packages required
 
 ---
